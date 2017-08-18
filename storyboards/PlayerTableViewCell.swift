@@ -10,6 +10,25 @@ import UIKit
 
 class PlayerTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelGame: UILabel!
+    @IBOutlet weak var imageRating: UIImageView!
+    
+    
+    var player: Player? {
+        didSet {
+            guard let player = player else {return}
+            labelName.text = player.name
+            labelGame.text = player.game
+            imageRating.image = image(forRating: player.rating)
+        }
+    }
+    
+    func image(forRating rating: Int) -> UIImage?{
+        let imageName = "\(rating)Stars"
+        return UIImage(named: imageName)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
